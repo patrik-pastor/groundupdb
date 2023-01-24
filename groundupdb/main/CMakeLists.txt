@@ -1,5 +1,8 @@
 add_executable(main main.cpp)
 
+add_library(database
+	database.cpp)
+
 ###TESTS###
 find_package(Catch2)
 add_executable(database_test
