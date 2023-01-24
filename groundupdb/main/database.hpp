@@ -27,6 +27,7 @@ private:
 };
 
 Database CreateEmpty(const std::string& dbname);
+Database LoadDb(const std::string& dbname);
 
 } // groundupdb
 

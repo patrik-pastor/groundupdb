@@ -46,4 +46,22 @@ TEST_CASE("database operations") {
         db.Destroy();
     }
 
+    // Story:
+    // [Who] As a database user
+    // [What] I need to create a reference to an existing database
+    // [Value] So I can later store and retrieve data
+    SECTION("Load an existing database") {
+        groundupdb::Database db2(groundupdb::LoadDb(dbname));
+
+        // We know we have been successful when
+        // 1. We have a valid database reference returned
+        // 2. The DB has a folder that exists on the file system
+        REQUIRE(fs::is_directory(db2.GetFullpath()));
+
+        // 3. The database folder is empty (no database files yet)
+        auto p = fs::directory_iterator(db2.GetFullpath());
+        REQUIRE(p == fs::end(p));
+
+        db.Destroy();
+    }
 }

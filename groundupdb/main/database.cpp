@@ -33,7 +33,7 @@ std::string Database::GetKeyValue(std::string const& key) const {
 }
 
 void Database::Destroy() {
-    if(std::filesystem::exists(fullpath_)) {
+    if (std::filesystem::exists(fullpath_)) {
         std::filesystem::remove_all(fullpath_);
     }
 }
@@ -47,6 +47,11 @@ Database CreateEmpty(std::string const& dbname) {
     if (!std::filesystem::exists(dbfolder)) {
         std::filesystem::create_directory(dbfolder);
     }
+    return {dbname, dbfolder};
+}
+
+Database LoadDb(std::string const& dbname) {
+    std::string dbfolder = ".groundupdb/" + dbname;
     return {dbname, dbfolder};
 }
 
